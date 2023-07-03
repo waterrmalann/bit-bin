@@ -17,6 +17,7 @@ const createSnippet = async (req, res) => {
         const snippet = await Snippet.create({ value, uniqueID });
         res.redirect(`/${snippet.uniqueID}`);
     } catch (e) {
+        console.error(e);
         res.render('new', { value });
     }
 };
@@ -26,10 +27,23 @@ const getSnippetById = async (req, res) => {
     const id = req.params.id;
     try {
         const snippet = await Snippet.findOne({ uniqueID: id });
-        res.render('snippet', { code: snippet.value });
+        res.render('snippet', { code: snippet.value, id: id });
     } catch (e) {
+        console.error(e);
         res.redirect('/');
     }
 };
 
-export { createSnippet, getSnippetById }
+// Retrieve a snippet by its ID raw.
+const getRawSnippetById = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const snippet = await Snippet.findOne({ uniqueID: id });
+        res.end(snippet.value);
+    } catch (e) {
+        console.error(e);
+        res.redirect('/');
+    }
+}
+
+export { createSnippet, getSnippetById, getRawSnippetById }
