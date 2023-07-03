@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 
-import { createSnippet, getSnippetById } from './controllers/snippetController.mjs';
+import { createSnippet, getSnippetById, getRawSnippetById } from './controllers/snippetController.mjs';
 
 // Initialize express app.
 const app = express();
@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 Use the commands in the top right corner
 to create a new file to share with others.`;
 
-    res.render('snippet', { code });
+    res.render('snippet', { code, id: 'abc' });
 });
 
 app.get('/new', (req, res) => {
@@ -35,6 +35,7 @@ app.get('/new', (req, res) => {
 
 app.post('/save', createSnippet);
 app.get('/:id', getSnippetById);
+app.get('/raw/:id', getRawSnippetById);
 
 const PORT = process.env.PORT || 3000;
 // Run the express app by listening to `PORT`.
