@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 
-import { createSnippet, getSnippetById, getRawSnippetById } from './controllers/snippetController.mjs';
+import { newSnippet, createSnippet, getSnippetById, getRawSnippetById } from './controllers/snippetController.mjs';
 
 // Initialize express app.
 const app = express();
@@ -29,10 +29,7 @@ to create a new file to share with others.`;
     res.render('snippet', { code, id: 'abc' });
 });
 
-app.get('/new', (req, res) => {
-    res.render('new');
-});
-
+app.get('/new', newSnippet);
 app.post('/save', createSnippet);
 app.get('/:id', getSnippetById);
 app.get('/raw/:id', getRawSnippetById);
