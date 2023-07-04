@@ -1,11 +1,19 @@
 <div class="buttons-wrapper">
     <a href="/" class="logo">BitBin</a>
     <div class="buttons">
-        <a href="/new" class="btn"><i class="ri-file-add-line"></i></a>
-        <% if (locals.canSave) { %>
-        <button class="btn" type="submit"><i class="ri-save-3-line"></i></button>
+        <!-- Button: New Snippet -->
+        <a title="Create a new snippet." href="/new" class="btn"><i class="ri-file-add-line"></i></a>
+        <!-- If the user is editing a snippet, show the following buttons. -->
+        <% if (locals.isEditing) { %>
+            <!-- Button: Save Snippet -->
+            <button title="Save the current snippet." class="btn" type="submit"><i class="ri-save-3-line"></i></button>
         <% } %>
-        <a href="/raw/<%= locals.id %>" class="btn"><i class="ri-file-2-line"></i></a>
-        <a href="/new?dupe=<%= locals.id %>" class="btn"><i class="ri-file-copy-line"></i></a>
+        <!-- If the user is viewing an existing snippet, show the following buttons. -->
+        <% if (locals.isViewing) { %>
+            <!-- Button: Raw Mode -->
+            <a title="View just the text." href="/raw/<%= locals.id %>" class="btn"><i class="ri-file-2-line"></i></a>
+            <!-- Button: Fork & Edit -->
+            <a title="Duplicate and edit." href="/new?dupe=<%= locals.id %>" class="btn"><i class="ri-file-copy-line"></i></a>
+        <% } %>
     </div>
 </div>

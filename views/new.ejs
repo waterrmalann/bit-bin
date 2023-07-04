@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('_head') %>
+<%- include('_head', {isEditing: true, isViewing: false}) %>
 <body>
     <form action="/save" method="POST">
-        <%- include('_buttons', {canSave: true}) %>
+        <%- include('_buttons', {isEditing: true, isViewing: false}) %>
         <div class="wrapper">
             <div class="line-numbers">
                 &gt;
             </div>
-            <textarea autofocus name="value"><%= locals.value %></textarea>
+            <textarea spellcheck="false" autofocus name="value"><%= locals.value %></textarea>
         </div>
     </form>
 
