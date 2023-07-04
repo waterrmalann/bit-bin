@@ -10,6 +10,17 @@ const nanoid = customAlphabet(alphabet, 13);
 import Snippet from '../models/Snippet.mjs';
 
 // Create a new snippet
+const newSnippet = async (req, res) => {
+    const id = req.query.dupe;
+    if (id) {
+        const snippet = await Snippet.findOne({ uniqueID: id });
+        res.render('new', { value: snippet.value });
+    } else {
+        res.render('new');
+    }
+};
+
+// Create a new snippet
 const createSnippet = async (req, res) => {
     const uniqueID = nanoid();
     const value = req.body.value;
@@ -46,4 +57,4 @@ const getRawSnippetById = async (req, res) => {
     }
 }
 
-export { createSnippet, getSnippetById, getRawSnippetById }
+export { newSnippet, createSnippet, getSnippetById, getRawSnippetById }
