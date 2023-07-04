@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('_head') %>
+<%- include('_head', {isEditing: false, isViewing: true}) %>
 <body>
-    <%- include('_buttons') %>
+    <%- include('_buttons', {isViewing: true, isEditing: false}) %>
     <div class="wrapper">
         <div class="line-numbers">
             <% for (let i = 1; i <= code.split('\n').length; i++) { %>

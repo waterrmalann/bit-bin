@@ -1,9 +1,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bit Bin</title>
+    <% if (locals.isViewing) { %>
+        <title>Bit Bin | Snippet</title>
+    <% } else if (locals.isEditing) { %>
+        <title>Bit Bin | New Snippet</title>
+    <% } else { %>
+        <title>Bit Bin</title>
+    <% } %>
 
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/solarized-light.min.css" integrity="sha512-ZW2g6Pn2pMbKSyjcA+r4Lc58kcfvOdcsTuCCTl3qz8NqVJwUtAuiN61pDoW3EEfrjwH2CPtkFWMdkzMY1idilA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <% if (locals.isViewing) { %>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/solarized-light.min.css" integrity="sha512-ZW2g6Pn2pMbKSyjcA+r4Lc58kcfvOdcsTuCCTl3qz8NqVJwUtAuiN61pDoW3EEfrjwH2CPtkFWMdkzMY1idilA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <% } %>
 </head>
