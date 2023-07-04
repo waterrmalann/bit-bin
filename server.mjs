@@ -31,8 +31,8 @@ to create a new file to share with others.`;
 
 app.get('/new', newSnippet);
 app.post('/save', createSnippet);
-app.get('/:id', getSnippetById);
 app.get('/raw/:id', getRawSnippetById);
+app.get('/:id', getSnippetById);
 
 const PORT = process.env.PORT || 3000;
 // Run the express app by listening to `PORT`.
