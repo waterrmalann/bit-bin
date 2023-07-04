@@ -13,8 +13,17 @@ import Snippet from '../models/Snippet.mjs';
 const newSnippet = async (req, res) => {
     const id = req.query.dupe;
     if (id) {
-        const snippet = await Snippet.findOne({ uniqueID: id });
-        res.render('new', { value: snippet.value });
+        try {
+            const snippet = await Snippet.findOne({ uniqueID: id });
+            if (snippet) {
+                res.render('new', { value: snippet.value });
+            } else {
+                res.redirect('/');
+            }
+        } catch (e) {
+            console.error(e);
+            res.redirect('/');
+        }
     } else {
         res.render('new');
     }
@@ -22,8 +31,14 @@ const newSnippet = async (req, res) => {
 
 // Create a new snippet
 const createSnippet = async (req, res) => {
-    const uniqueID = nanoid();
     const value = req.body.value;
+    if (!value) {
+        res.redirect('/');
+        return;
+    }
+
+    const uniqueID = nanoid();
+
     try {
         const snippet = await Snippet.create({ value, uniqueID });
         res.redirect(`/${snippet.uniqueID}`);
@@ -38,7 +53,11 @@ const getSnippetById = async (req, res) => {
     const id = req.params.id;
     try {
         const snippet = await Snippet.findOne({ uniqueID: id });
-        res.render('snippet', { code: snippet.value, id: id });
+        if (snippet) {
+            res.render('snippet', { code: snippet.value, id: id });
+        } else {
+            res.redirect('/');
+        }
     } catch (e) {
         console.error(e);
         res.redirect('/');
@@ -50,7 +69,11 @@ const getRawSnippetById = async (req, res) => {
     const id = req.params.id;
     try {
         const snippet = await Snippet.findOne({ uniqueID: id });
-        res.end(snippet.value);
+        if (snippet) {
+            res.end(snippet.value);
+        } else {
+            res.redirect('/');
+        }
     } catch (e) {
         console.error(e);
         res.redirect('/');
