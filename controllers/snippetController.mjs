@@ -33,9 +33,9 @@ const newSnippet = async (req, res) => {
 const createSnippet = async (req, res) => {
 
     //valid timer's
-    const timers = {'3': true,'6': true,'12': true}
+    const timers = { '3': true, '6': true, '12': true };
 
-    const {value, timer} = req.body;
+    const { value, timer } = req.body;
     if (!value || !timers[timer]) {
         res.redirect('/');
         return;
@@ -44,7 +44,7 @@ const createSnippet = async (req, res) => {
     const uniqueID = nanoid();
 
     const now = new Date()
-    const expiryDate = new Date(now.getTime() + +timer * 60 * 60 * 1000)
+    const expiryDate = new Date(now.getTime() + timer * 60 * 60 * 1000)
 
 
     try {
