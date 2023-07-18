@@ -96,3 +96,7 @@ textarea {
     background-color: #586e75;
     color: white;
 }
+
+#timer-inp {
+    display: none;
+}

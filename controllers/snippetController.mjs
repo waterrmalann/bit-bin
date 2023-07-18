@@ -31,16 +31,24 @@ const newSnippet = async (req, res) => {
 
 // Create a new snippet
 const createSnippet = async (req, res) => {
-    const value = req.body.value;
-    if (!value) {
+
+    //valid timer's
+    const timers = {'3': true,'6': true,'12': true}
+
+    const {value, timer} = req.body;
+    if (!value || !timers[timer]) {
         res.redirect('/');
         return;
     }
 
     const uniqueID = nanoid();
 
+    const now = new Date()
+    const expiryDate = new Date(now.getTime() + +timer * 60 * 60 * 1000)
+
+
     try {
-        const snippet = await Snippet.create({ value, uniqueID });
+        const snippet = await Snippet.create({ value, uniqueID, expiryDate });
         res.redirect(`/${snippet.uniqueID}`);
     } catch (e) {
         console.error(e);

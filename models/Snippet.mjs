@@ -10,6 +10,11 @@ const snippetSchema = new mongoose.Schema({
         required: true,
         index: true,
         unique: true
+    },
+    expiryDate : {
+        type: Date,
+        required: true,
+        index: {expireAfterSeconds: 0}
     }
 });
 
