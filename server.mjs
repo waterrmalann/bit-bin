@@ -7,10 +7,10 @@ import { newSnippet, createSnippet, getSnippetById, getRawSnippetById } from './
 const app = express();
 
 // Establish conenction with MongoDB.
-mongoose.connect("mongodb://localhost/bitbin", {
+mongoose.connect("mongodb://127.0.0.1/bitbin", {
     useUnifiedTopology: true,
     useNewUrlParser: true
-});
+}).then(()=> console.log('connected'))
 
 // Set EJS as the templating language and view engine.
 app.set('view engine', 'ejs');

@@ -7,6 +7,8 @@
         <% if (locals.isEditing) { %>
             <!-- Button: Save Snippet -->
             <button title="Save the current snippet." class="btn" type="submit"><i class="ri-save-3-line"></i></button>
+            <input type="text" name="timer" id="timer-inp" value="12">
+            <button id="timer-btn" title="Save the current snippet." class="btn" type="button"><i class="ri-timer-line"></i><span id="timer-display">12</span>h</button>
         <% } %>
         <!-- If the user is viewing an existing snippet, show the following buttons. -->
         <% if (locals.isViewing) { %>
